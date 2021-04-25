@@ -1,9 +1,8 @@
 " Vim File
-" Author: Guy J Grigsby <https://grigsby.dev>
+" Author: {{ author }}
 " Version: 0.1.0
-" Created: 21:06:35 05/10/2004
-" Title:   {{ fname }}.vim
-" Summary: A plugin, mostly useless, Just like I feel these days.
-" Install: Plug 'guygrigsby/{{ name }}
+" Created: {{ now }}
+" Title:   {{ fname }}
+" Summary: 
 
 

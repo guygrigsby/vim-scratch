@@ -11,7 +11,14 @@ function! scratch#make_new()
     let head = []
     for line in readfile(tmp)
       let line = substitute(line, '{{ fname }}', expand('%:t'), 'g')
-      let line = substitute(line, '{{ name }}', expand('%:h:t'), 'g')
+      let line = substitute(line, '{{ now }}', strftime("%c"), 'g')
+      if !exists('g:scratch_author')
+        let g:scratch_author = "author"
+      endif
+      if !exists('g:scratch_description')
+        let g:scratch_description = "Happy vimming"
+      endif
+      let line = substitute(line, '{{ author }}', g:scratch_author, 'g')
       call add(head, line)
 
     endfor
@@ -19,28 +26,4 @@ function! scratch#make_new()
     return 1
   endif
   return
-
-  if !exists('g:scratch_author')
-    let g:scratch_author = "Guy J Grigsby <https://grigsby.dev>"
-  endif
-  if !exists('g:scratch_version')
-    let g:scratch_version = "0.1.0"
-  endif
-  if !exists('g:scratch_description')
-    let g:scratch_description = "A plugin, mostly useless, Just like I feel these days."
-  endif
-  call s:write_vim_header()
 endfunction
-
-function! s:write_vim_header()
-  let line = '" Version: ' . g:scratch_version
-  call append(0, line)
-  let line = '" Author: ' . g:scratch_author
-  call append(0, line)
-  let desc_line = ['"', expand('%:t'), g:scratch_description]
-  let line = join(desc_line, ' ')
-
-  call append(0, line)
-endfunction
-
-
